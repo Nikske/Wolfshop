@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <h1>Aaaah</h1>
+    <form id="thingForm">
+        <label>Type a thing</label>
+        <input type="text" id="thing">
+        <button type="submit">Submit thing</button>
+    </form>
+
+    <script>
+        const {ipcRenderer} = require('electron');
+
+        const form = document.getElementById('thingForm');
+        form.addEventListener('submit', submitForm);
+
+        function submitForm(event) {
+            event.preventDefault();
+
+            const thing = document.getElementById('thing').value;
+            ipcRenderer.send('add-thing', thing);
+        }
+    </script>
+  </body>
+</html>

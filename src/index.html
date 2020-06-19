@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <h1>💖 Hello World!</h1>
+    <p>Welcome to your Electron application.</p>
+    <button type="submit" id="newWin">Yo, please make me a new button</button>
+
+    <script>
+      const {BrowserWindow, ipcRenderer} = require('electron');
+      const btn = document.getElementById('newWin');
+
+      // IPC - Creating a new window
+      btn.addEventListener('click', () => {
+        createWindow();
+      });
+      function createWindow() {
+        ipcRenderer.send('open-new-window');
+      }
+
+      // IPC - Receiving from main
+      ipcRenderer.on('add-thing', (event, thing) => {
+        console.log(thing);
+      })
+    </script>
+  </body>
+</html>
